@@ -1,0 +1,2 @@
+# Linkedlist Operations Implementation
+This project highlights linkedlist traversal, addition and deletion of nodes inside the linked list. The application of C programming tackles pointers and recursion.
