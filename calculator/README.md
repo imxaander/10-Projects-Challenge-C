@@ -4,7 +4,7 @@ This is a basic command line arithmetic calculator written in C that utilizes co
 ## Usage
 Run the executable with the following syntax:
 
-  `./calculator <first_number> <_operator> <second_number>` 
+  `./imxcalculator <first_number> <_operator> <second_number>` 
 
 <first_number>: The first operand (must be a valid number) <br>
 <_operator>: The operator for the operation (+, -, *, /) <br>
