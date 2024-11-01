@@ -141,7 +141,6 @@ char* get_line(void){
     char* lineResult = (char*) malloc(0);
 
     char tmp = getchar(); //pointer to the current scanned character in the input stream
-
     if(tmp == '\n' ) return NULL;
 
     unsigned int currentStringLength = 0;
@@ -149,7 +148,7 @@ char* get_line(void){
         // printf("char : %c", tmp);
         char* tmpResult = realloc(lineResult, (++currentStringLength * sizeof(char)));
         *(tmpResult + currentStringLength - 1) = tmp;
-
+        
         lineResult = tmpResult;
         // printf("string : %s\n", lineResult);
         tmp = getchar();
