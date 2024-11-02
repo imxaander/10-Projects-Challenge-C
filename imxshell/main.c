@@ -105,7 +105,6 @@ void welcome_message(void){
     printf("███  ███   ███   ███   ▐███  ▀███             ███   ███    ███     ███    █▄  ███       ███       \n");
     printf("███  ███   ███   ███  ▄███     ███▄     ▄█    ███   ███    ███     ███    ███ ███▌    ▄ ███▌    ▄ \n");
     printf("█▀    ▀█   ███   █▀  ████       ███▄  ▄████████▀    ███    █▀      ██████████ █████▄▄██ █████▄▄██ \n");
-    
     printf("Shell By: imxaander\t\tVersion 1.0\n");
 }
 
@@ -145,7 +144,6 @@ char** parse_arguments(char* args, size_t* size){
 void execute_command(size_t command_id, size_t argc, char** args){
     commands_lookup[command_id].cmdFnc(argc, args);
 }
-
 
 void print_args(size_t argc, char** argv){
     for(size_t i = 0; i < argc; i++){
