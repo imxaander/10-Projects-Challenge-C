@@ -1,8 +1,7 @@
 #include <malloc.h>
 #include <string.h>
-#include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 // MY OWN LIBRARIES <3
 #include "mychelper.h"
@@ -41,7 +40,11 @@ size_t get_commands_lookup_size();
 char** parse_arguments(char* args, size_t* size);
 
 // executes the command id passed with args
-void execute_command(int id, char* args);
+void execute_command(size_t command_id, size_t argc, char** args);
+
+// prints arguments
+void print_args(size_t argc, char** argv);
+
 
 int main(int argc, char** argv){
     welcome_message();
@@ -66,14 +69,13 @@ int main(int argc, char** argv){
             // for(size_t i = 0; i < arg_size; i++){
             //     printf("%s\n", *(arg_values + i));
             // }
-
+            execute_command(command_id, arg_size, arg_values);
             // execute programs now
             
             continue;
         }
         printf("Not a valid command on your system.\n");
     }while(1);
-
     return 0;
 }
 
@@ -119,6 +121,14 @@ char** parse_arguments(char* args, size_t* size){
     *(size) = (int)i;
     return args_array;
 }
-void execute_command(int id, char* args){
 
+void execute_command(size_t command_id, size_t argc, char** args){
+    commands_lookup[command_id].cmdFnc(argc, args);
 }
+
+void print_args(size_t argc, char** argv){
+    for(size_t i = 0; i < argc; i++){
+        printf("%s\n", *(argv + i));
+    }
+}
+

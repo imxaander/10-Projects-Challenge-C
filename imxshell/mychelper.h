@@ -57,7 +57,7 @@ char toUpperCase(char c);
 // Note: u cannot use sizeof() here because sizeof() only checks the pointer's size
 // when you check the size of a character pointer, it will return 4 or 8 bytes (size of character in bytes)
 // but it depends on your system.
-__u_int getStringLength(char* s){
+unsigned int getStringLength(char* s){
     unsigned int i = 0;
     while(*(s+i) != '\0'){
         i++;
@@ -69,13 +69,13 @@ __u_int getStringLength(char* s){
 char* concatString(char* s1, char* s2){
     // to concatenate string, we can use getStringLength() tio get the length 
     // and then allocate the memory for that addition of string 
-    __u_int s1_size = getStringLength(s1);
-    __u_int s2_size = getStringLength(s2);
-    __u_int cS_size = s1_size + s2_size - 1;
+    unsigned int s1_size = getStringLength(s1);
+    unsigned int s2_size = getStringLength(s2);
+    unsigned int cS_size = s1_size + s2_size - 1;
 
     char* cS = (char*) malloc((cS_size) * sizeof(char));
     
-    for(__u_int i = 0; i < cS_size; i++){
+    for(unsigned int i = 0; i < cS_size; i++){
         if(i < s1_size-1){
             *(cS + i) = *(s1+i);
         }else{
@@ -93,7 +93,7 @@ bool compareString(char* s1, char* s2){
         return false;
     }
     // i couldve made this faster by setting string lengths to a var
-    for(__u_int i = 0; i < getStringLength(s1); i++){
+    for(unsigned int i = 0; i < getStringLength(s1); i++){
         if(*(s1+i) != *(s2+i)) return false;
     }
 
@@ -101,7 +101,7 @@ bool compareString(char* s1, char* s2){
 }
 
 char* reverseString(char* s){
-    __u_int sL = getStringLength(s);
+    unsigned int sL = getStringLength(s);
     char* rS = (char*) malloc(sL * sizeof(char));
     for(int i = sL-2; i >= 0; i--){
         *(rS+i) = *(s + (sL - (i+2)));
@@ -112,16 +112,16 @@ char* reverseString(char* s){
 }
 
 void changeCaseString(char* s, int type){
-    __u_int sS = getStringLength(s);
+    unsigned int sS = getStringLength(s);
     switch (type)
     {
     case 1:
-        for(__u_int i = 0; i < sS; i++){
+        for(unsigned int i = 0; i < sS; i++){
             *(s+i) = toLowerCase(*(s+i));
         }
         break;
     case 2:
-        for(__u_int i = 0; i < sS; i++){
+        for(unsigned int i = 0; i < sS; i++){
             *(s+i) = toUpperCase(*(s+i));
         }
         break;
