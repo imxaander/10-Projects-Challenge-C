@@ -12,7 +12,6 @@ Linkedlist Operations Implementation
 
 #### Description: This project highlights linked list traversal, addition, and deletion of nodes within a linked list. It focuses on the application of C programming with pointers and recursion.
 
-
 ### RLE Binary File Compressor
 
 #### Description: This C program takes a binary file as input and compresses it to a bin file that contains the RLE-compressed version. It uses RLE naively without any optimizations or modifications to the algorithm.
@@ -22,7 +21,9 @@ Example:
 ./imxcompressor file.bin
 It will create another file that starts with cmprsssd_, which will be the compressed version of your binary file.
 
-### 
+### mychelper
+#### Description : This header file is so dumb and stupid to help you. It aims to help ME develop C-programmed applications. This header file contains cluttered functions and constants to be used for my apps. You can use it if you want to get tired of your current project.
+
 ### Linkedlist Operations Implementation
 #### Description: This project highlights linkedlist traversal, addition and deletion of nodes inside the linked list. The application of C programming tackles pointers and recursion.
 
