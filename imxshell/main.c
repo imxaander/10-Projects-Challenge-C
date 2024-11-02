@@ -2,25 +2,32 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
-
+#include <wait.h>
+#include <dirent.h>
 // MY OWN LIBRARIES <3
 #include "mychelper.h"
 #include "imxshell.h"
 
 // MACROS AND CONSTANTS
-#define INPUT_PREFIX "xander>"
+#define INPUT_PREFIX "imx>"
 #define NCID -1
+#define BINARY_DIR "/bin/"
 
 enum command_ids{
     LIST_DIRECTORY = 0,
-    LIST_DIRECTORY2,
-
+    CLEAR_SCREEN,
+    CHANGE_DIRECTORY,
+    SHOW_DIRECTORY,
+    TEST_CMD
 };
 
 // COMMANDS LOOKUP TABLE
 Command commands_lookup[] = {
+    [TEST_CMD] =  {"test", cmd_test},
     [LIST_DIRECTORY] =  {"ls", cmd_list_directory},
-    [LIST_DIRECTORY2] =  {"ls3", cmd_list_directory},
+    [CLEAR_SCREEN] =  {"clear", cmd_clear_screen},
+    [CHANGE_DIRECTORY] =  {"cd", cmd_change_directory},
+    [SHOW_DIRECTORY] = {"pwd", cmd_get_working_directory}
 };
 
 
@@ -45,12 +52,11 @@ void execute_command(size_t command_id, size_t argc, char** args);
 // prints arguments
 void print_args(size_t argc, char** argv);
 
-
 int main(int argc, char** argv){
     welcome_message();
     char* input;
     do{
-        printf("%s ", INPUT_PREFIX);
+        printf("%s ",  INPUT_PREFIX);
         input = get_line();
 
         //check if blank, continue if yes
@@ -63,15 +69,26 @@ int main(int argc, char** argv){
 
         char* input_token = strtok(input_dup, " ");
         int command_id = get_command_id(input_token);
+        size_t arg_size;
+        char** arg_values = parse_arguments(input, &arg_size);
         if(command_id >= 0){
-            size_t arg_size;
-            char** arg_values = parse_arguments(input, &arg_size);
             // for(size_t i = 0; i < arg_size; i++){
             //     printf("%s\n", *(arg_values + i));
             // }
             execute_command(command_id, arg_size, arg_values);
             // execute programs now
-            
+            continue;
+        }
+
+        // since there is no command exists with the alias, we try to check if that is a system command
+        char* binpath = (char*) malloc((getStringLength(input_token) + getStringLength(BINARY_DIR) - 1) * sizeof(char));
+        strcpy(binpath, BINARY_DIR);
+        char* fullbinpath = strcat(binpath, input_token);
+        // printf("%s\n", fullbinpath);
+        FILE* tmp;
+        if(tmp = fopen(fullbinpath, "r")){
+            fclose(tmp);
+            execute_system_command(command_id, fullbinpath, arg_values);
             continue;
         }
         printf("Not a valid command on your system.\n");
@@ -80,12 +97,15 @@ int main(int argc, char** argv){
 }
 
 void welcome_message(void){
-    printf(" _____ ___  _____   __ _____  _   _  _____  _      _     \n");
-    printf("|_   _||  \\/  |\\ \\ / //  ___|| | | ||  ___|| |    | |    \n");
-    printf("  | |  | .  . | \\ V / \\ `--. | |_| || |__  | |    | |    \n");
-    printf("  | |  | |\\/| | /   \\  `--. \\|  _  ||  __| | |    | |    \n");
-    printf(" _| |_ | |  | |/ /^\\ \\/\\__/ /| | | || |___ | |____| |____\n");
-    printf(" \\___/ \\_|  |_/\\/   \\/\\____/ \\_| |_/\\____/ \\_____/\\_____/\n");
+    printf(" ▄█    ▄▄▄▄███▄▄▄▄   ▀████    ▐████▀    ▄████████    ▄█    █▄       ▄████████  ▄█        ▄█       \n");
+    printf("███  ▄██▀▀▀███▀▀▀██▄   ███▌   ████▀    ███    ███   ███    ███     ███    ███ ███       ███       \n");
+    printf("███▌ ███   ███   ███    ███  ▐███      ███    █▀    ███    ███     ███    █▀  ███       ███       \n");
+    printf("███▌ ███   ███   ███    ▀███▄███▀      ███         ▄███▄▄▄▄███▄▄  ▄███▄▄▄     ███       ███       \n");
+    printf("███▌ ███   ███   ███    ████▀██▄     ▀███████████ ▀▀███▀▀▀▀███▀  ▀▀███▀▀▀     ███       ███       \n");
+    printf("███  ███   ███   ███   ▐███  ▀███             ███   ███    ███     ███    █▄  ███       ███       \n");
+    printf("███  ███   ███   ███  ▄███     ███▄     ▄█    ███   ███    ███     ███    ███ ███▌    ▄ ███▌    ▄ \n");
+    printf("█▀    ▀█   ███   █▀  ████       ███▄  ▄████████▀    ███    █▀      ██████████ █████▄▄██ █████▄▄██ \n");
+    
     printf("Shell By: imxaander\t\tVersion 1.0\n");
 }
 
@@ -107,7 +127,7 @@ size_t get_commands_lookup_size(){
 char** parse_arguments(char* args, size_t* size){
     char** args_array = (char**) malloc(0);
     char* arg_tokens = strtok(args, " "); //first call gets first word (command alias)
-    arg_tokens = strtok(NULL, " ");
+    // arg_tokens = strtok(NULL, " ");
 
     size_t i = 0; //arg pointer counter
     while(arg_tokens != NULL){
@@ -125,6 +145,7 @@ char** parse_arguments(char* args, size_t* size){
 void execute_command(size_t command_id, size_t argc, char** args){
     commands_lookup[command_id].cmdFnc(argc, args);
 }
+
 
 void print_args(size_t argc, char** argv){
     for(size_t i = 0; i < argc; i++){

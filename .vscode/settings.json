@@ -4,6 +4,11 @@
         "stdio.h": "c",
         "unistd.h": "c",
         "malloc.h": "c",
-        "mychelper.h": "c"
+        "mychelper.h": "c",
+        "array": "cpp",
+        "string_view": "cpp",
+        "format": "cpp",
+        "initializer_list": "cpp",
+        "span": "cpp"
     }
 }

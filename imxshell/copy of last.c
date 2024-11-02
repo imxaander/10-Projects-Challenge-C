@@ -41,6 +41,8 @@ int main(int argc, char** argv){
             printf("%s\n", arguments);
             arguments = strtok(NULL, " ");
         }
+
+        
         char* binpath = (char*) malloc((getStringLength(input_token) + getStringLength(BINARY_DIR) - 1) * sizeof(char));
         strcpy(binpath, BINARY_DIR);
         char* fullbinpath = strcat(binpath, input_token);
