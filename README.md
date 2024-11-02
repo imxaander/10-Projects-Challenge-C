@@ -1,4 +1,4 @@
-# README for 10-Projects-Challenge-C
+# 10-Projects-Challenge-C
 Welcome to the 10 Projects Challenge in C! This repository is a personal challenge to build 10 different projects using the C programming language and my own C library. Below are the projects completed so far, with a brief description for each:
 
 ## Projects
