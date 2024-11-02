@@ -2,17 +2,6 @@
 Welcome to the 10 Projects Challenge in C! This repository is a personal challenge to build 10 different projects using the C programming language and my own C library. Below are the projects completed so far, with a brief description for each:
 
 ## Projects
-### Basic Command Line Calculator
-
-#### Description: A basic command line arithmetic calculator that utilizes command line arguments (argc, argv).
-#### Usage:
-./imxcalculator <first_number> <_operator> <second_number>
-<first_number>: The first operand (must be a valid number)
-
-<_operator>: The operator for the operation (+, -, *, /)
-
-<second_number>: The second operand (must be a valid number)
-
 ### IMXSHELL
 
 #### Description: A custom Unix/Linux shell that supports basic commands (ls, cd, pwd, clear) and external applications located in the /bin/ directory.
@@ -32,6 +21,21 @@ Linkedlist Operations Implementation
 Example:
 ./imxcompressor file.bin
 It will create another file that starts with cmprsssd_, which will be the compressed version of your binary file.
+
+### Linkedlist Operations Implementation
+#### Description: This project highlights linkedlist traversal, addition and deletion of nodes inside the linked list. The application of C programming tackles pointers and recursion.
+
+### Basic Command Line Calculator
+
+#### Description: A basic command line arithmetic calculator that utilizes command line arguments (argc, argv).
+#### Usage:
+./imxcalculator <first_number> <_operator> <second_number>
+<first_number>: The first operand (must be a valid number)
+
+<_operator>: The operator for the operation (+, -, *, /)
+
+<second_number>: The second operand (must be a valid number)
+
 
 ## Contributing
 Feel free to fork this repository and submit pull requests. Any contributions that improve the projects or add new ones are welcome!
