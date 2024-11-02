@@ -22,6 +22,7 @@ Example:
 ./imxcompressor file.bin
 It will create another file that starts with cmprsssd_, which will be the compressed version of your binary file.
 
+### 
 ### Linkedlist Operations Implementation
 #### Description: This project highlights linkedlist traversal, addition and deletion of nodes inside the linked list. The application of C programming tackles pointers and recursion.
 
