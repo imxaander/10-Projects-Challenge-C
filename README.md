@@ -2,6 +2,8 @@
 Welcome to the 10 Projects Challenge in C! This repository is a personal challenge to build 10 different projects using the C programming language and my own C library. Below are the projects completed so far, with a brief description for each:
 
 ## Projects
+### IMXWEBSERVER
+a web server, basic http response for files, fuc
 ### IMXSHELL
 
 #### Description: A custom Unix/Linux shell that supports basic commands (ls, cd, pwd, clear) and external applications located in the /bin/ directory.
